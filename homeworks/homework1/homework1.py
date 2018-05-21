@@ -64,7 +64,7 @@ def equalize(img):
     cv2.imwrite('comparison.png',res)
 
     return
-git
+
 def stratch_contrast(img, darkestValue, whitestValue): 
 
     newImgPixelList = []
