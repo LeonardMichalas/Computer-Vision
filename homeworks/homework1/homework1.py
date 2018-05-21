@@ -22,7 +22,6 @@ def get_histo_scope(img):
     for y in range(0, w):
         for x in range(0, h):       
             px = img[x][y] #reads the pixel which is a npndarray [][][]
-            print(px)
             imgPixelList.append(px) #saves the pixel data of every pixel we loop so we can use it later to plot the histogram
             if darkestValue > px: #identifies the darkest pixel value
                 darkestValue = px
@@ -43,27 +42,30 @@ def plot(imgPixelList, darkestValue, whitestValue, title):
 
     return     
 
-def stratch_contrast(img, darkestValue, whitestValue): 
+def equalize(img):
+    hist,bins = np.histogram(img.flatten(),256,[0,256])
+    cdf = hist.cumsum()
+    cdf_normalized = cdf * hist.max()/ cdf.max()
 
-    #hist,bins = np.histogram(img.flatten(),256,[0,256])
-    #cdf = hist.cumsum()
-    #cdf_normalized = cdf * hist.max()/ cdf.max()
+    cdf_m = np.ma.masked_equal(cdf,0)
+    cdf_m = (cdf_m - cdf_m.min())*255/(cdf_m.max()-cdf_m.min())
+    cdf = np.ma.filled(cdf_m,0).astype('uint8')
+    img = cdf[img]
 
-    #Comment out to remove Equalization 
-    #cdf_m = np.ma.masked_equal(cdf,0)
-    #cdf_m = (cdf_m - cdf_m.min())*255/(cdf_m.max()-cdf_m.min())
-    #cdf = np.ma.filled(cdf_m,0).astype('uint8')
-    #img = cdf[img]
-
-    #plt.hist(img.flatten(),256,[0,256], color = 'r')
-    #plt.xlim([0,256])
-    #plt.legend(('cdf','histogram'), loc = 'upper left')
-    #plt.show()
+    plt.hist(img.flatten(),256,[0,256], color = 'r')
+    plt.xlim([0,256])
+    plt.legend(('cdf','histogram'), loc = 'upper left')
+    plt.title('Equalized Histogram')
+    plt.show()
 
     img = cv2.imread(name,0)
     equ = cv2.equalizeHist(img)
     res = np.hstack((img,equ)) #stacking images side-by-side
     cv2.imwrite('comparison.png',res)
+
+    return
+
+def stratch_contrast(img, darkestValue, whitestValue): 
 
     newImgPixelList = []
 
@@ -93,6 +95,11 @@ darkestValue, whitestValue, imgPixelList = get_histo_scope(img) #get scope and p
 
 plot(imgPixelList, darkestValue, whitestValue, 'Normal Histogram') #plot the collected pixel values
 
-newImgPixelList, darkestValueStratch, whitestValueStratch = stratch_contrast(img, darkestValue, whitestValue)
+equalize(img) #Equalize, plot and comparison picture
 
-plot(newImgPixelList, int(darkestValueStratch), int(whitestValueStratch), 'Equalized Histogram')
+
+#NOT WORKING AS IT SHOULD
+
+#newImgPixelList, darkestValueStratch, whitestValueStratch = stratch_contrast(img, darkestValue, whitestValue)
+
+#plot(newImgPixelList, int(darkestValueStratch), int(whitestValueStratch), 'Equalized Histogram')
