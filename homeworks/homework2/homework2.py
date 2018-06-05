@@ -34,5 +34,5 @@ newImage = np.array(pixelList)
 
 plt.imshow(newImage)
 plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
-plt.show()\
+plt.show()
 
