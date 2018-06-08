@@ -6,12 +6,12 @@ from PIL import Image
 import scipy.ndimage as ndimage
 from scipy.ndimage.filters import gaussian_filter
 
-
 # 1. Load Image
-name = 'ebay.png'
+
+name = 'kind.png'
 img = cv.imread(name) #import image
 h, w = img.shape[:2]
-kernel = 3
+kernel = 9
 radius = (kernel-1)/2
 
 img2 = np.zeros((h, w, 3), dtype = 'uint8') #new image to paint on
