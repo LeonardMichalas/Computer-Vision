@@ -8,10 +8,10 @@ from scipy.ndimage.filters import gaussian_filter
 
 # 1. Load Image
 
-name = 'kind.png'
+name = 'ebay.png'
 img = cv.imread(name) #import image
 h, w = img.shape[:2]
-kernel = 9
+kernel = 5
 radius = (kernel-1)/2
 
 img2 = np.zeros((h, w, 3), dtype = 'uint8') #new image to paint on
@@ -24,10 +24,8 @@ def pxIsInImgRange(x, y):
 
 # 2. Smoothing the shit out
 
-for x in range (-radius, w+radius):
-    for y in range (-radius, h+radius):
-
-        if pxIsInImgRange(x,y): #checks wither pixel ist within the image borders only if it is it starts the algorithm
+for x in range (0, w):
+    for y in range (0, h):
                 
                 px = 0
                 
