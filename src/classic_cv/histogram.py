@@ -73,11 +73,11 @@ def stretch_contrast(
     The simpler cousin of :func:`equalise`: it moves the two ends of the range
     without changing the shape of the histogram in between.
 
-    This is the function that was marked ``NOT WORKING AS IT SHOULD`` in the
-    2018 version, for three reasons, all fixed here. It divided by 256 rather
-    than 255, so pure white came out one short. It wrote float results into a
-    ``uint8`` array. And it never clipped, so a pixel outside ``[low, high]``
-    wrapped around and a shadow came back bright white.
+    Three details decide whether it works. The scale factor is 255, not 256,
+    or pure white comes out one level short. The result is rounded before it
+    goes back into a ``uint8`` array rather than truncated into one. And it is
+    clipped, because without clipping a pixel outside ``[low, high]`` wraps
+    around and a shadow comes back bright white.
 
     Args:
         image: the greyscale image to stretch.

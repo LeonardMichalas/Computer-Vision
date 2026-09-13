@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Assignment 1 -- histograms, equalisation and contrast stretching.
+"""Histogram equalisation and contrast stretching.
 
 Plots the histogram of a greyscale image, equalises it with a hand-written
 lookup table, stretches its contrast, and saves a side-by-side comparison
 against OpenCV's own ``equalizeHist`` so the two can be judged against each
 other.
 
-    python homework1.py
-    python homework1.py --image puppy.jpg --show
+    python examples/histogram_equalization.py
+    python examples/histogram_equalization.py --image samples/puppy.jpg --show
 """
 
 from __future__ import annotations
@@ -20,8 +20,9 @@ import numpy as np
 
 from classic_cv import equalise, histogram, load_grayscale, save, stretch_contrast
 
-HERE = Path(__file__).parent
-DEFAULT_IMAGE = HERE / "flower_grey_image.jpg"
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_IMAGE = ROOT / "samples" / "flower.jpg"
+DEFAULT_OUTPUT = ROOT / "output" / "histogram_equalization"
 
 
 def plot_histograms(images: dict[str, np.ndarray], destination: Path, show: bool) -> None:
@@ -53,7 +54,7 @@ def main() -> None:
         "--image", type=Path, default=DEFAULT_IMAGE, help="greyscale image to analyse"
     )
     parser.add_argument(
-        "--output", type=Path, default=HERE / "output", help="where to write results"
+        "--output", type=Path, default=DEFAULT_OUTPUT, help="where to write results"
     )
     parser.add_argument("--show", action="store_true", help="open the plots in a window as well")
     args = parser.parse_args()

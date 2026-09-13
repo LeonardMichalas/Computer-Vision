@@ -30,7 +30,7 @@ def test_cumulative_distribution_ends_at_the_pixel_count(noise: NDArray[np.uint8
 
 
 def test_equalise_matches_opencv(noise: NDArray[np.uint8]) -> None:
-    """The whole point of assignment 1: our lookup table against the library's."""
+    """The heart of it: our lookup table against the library's."""
     np.testing.assert_array_equal(equalise(noise), cv2.equalizeHist(noise))
 
 
@@ -63,7 +63,7 @@ def test_stretch_contrast_maps_the_ends_to_black_and_white() -> None:
 
 
 def test_stretch_contrast_reaches_pure_white() -> None:
-    """The 2018 version divided by 256 and stopped one grey level short."""
+    """Scaling by 256 instead of 255 stops one grey level short of white."""
     image = np.array([[0, 255]], dtype=np.uint8)
     assert stretch_contrast(image)[0, 1] == 255
 

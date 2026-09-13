@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Assignment 3 -- Sobel edge detection.
+"""Sobel edge detection.
 
 Smooths the image, takes the Sobel derivative in both directions, combines them
 into an edge strength and thresholds the result into a binary edge map. Every
 stage is written out and saved, so the pipeline can be inspected step by step.
 
-    python homework3.py
-    python homework3.py --image coin.png --threshold 60 --norm l1
+    python examples/edge_detection.py
+    python examples/edge_detection.py --image samples/coin.png --threshold 60
 """
 
 from __future__ import annotations
@@ -27,8 +27,9 @@ from classic_cv import (
     sobel_gradients,
 )
 
-HERE = Path(__file__).parent
-DEFAULT_IMAGE = HERE / "doku.png"
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_IMAGE = ROOT / "samples" / "sudoku.png"
+DEFAULT_OUTPUT = ROOT / "output" / "edge_detection"
 
 
 def main() -> None:
@@ -46,11 +47,11 @@ def main() -> None:
         "--norm",
         choices=["l2", "l1"],
         default="l2",
-        help="how to combine the two gradients. 'l1' is |gx|+|gy|, what the "
-        "2018 version used (default: l2)",
+        help="how to combine the two gradients. 'l1' is the cheaper "
+        "|gx|+|gy| approximation (default: l2)",
     )
     parser.add_argument(
-        "--output", type=Path, default=HERE / "output", help="where to write results"
+        "--output", type=Path, default=DEFAULT_OUTPUT, help="where to write results"
     )
     parser.add_argument("--show", action="store_true", help="open the stages in windows")
     args = parser.parse_args()

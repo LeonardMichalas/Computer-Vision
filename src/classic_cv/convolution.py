@@ -47,9 +47,9 @@ def correlate(
         image: 2-D greyscale or 3-D colour image, any numeric dtype.
         kernel: 2-D kernel with odd side lengths.
         padding: how to invent the pixels outside the border. ``"zero"``
-            reproduces the behaviour of the 2018 version of this code, which
-            treated everything outside the image as black and therefore left a
-            dark rim. ``"edge"`` repeats the border pixel instead, and
+            treats everything outside the image as black, which is the simplest
+            rule and the one that leaves a dark rim. ``"edge"`` repeats the
+            border pixel instead, and
             ``"reflect"`` mirrors the image back on itself. In OpenCV's names
             these are BORDER_CONSTANT, BORDER_REPLICATE and BORDER_REFLECT_101
             -- note the 101: OpenCV's plain BORDER_REFLECT repeats the edge
@@ -100,9 +100,7 @@ def convolve(
 def box_kernel(size: int = 5) -> FloatImage:
     """An averaging kernel: every entry is ``1 / size**2``, so the whole sums to 1.
 
-    Summing to 1 is what keeps the image's overall brightness unchanged. The
-    2018 version built the same filter out of ones and divided afterwards,
-    which is the same thing said twice.
+    Summing to 1 is what keeps the image's overall brightness unchanged.
     """
     if size < 1 or size % 2 == 0:
         raise ValueError(f"box kernel size must be odd and positive, got {size}")

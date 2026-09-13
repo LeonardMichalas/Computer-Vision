@@ -45,10 +45,10 @@ jobs:
       - name: Tests
         run: uv run pytest
 
-      - name: Run every assignment end to end
+      - name: Run every example end to end
         # Proof that the scripts themselves still work, not just the library.
         run: |
-          uv run python homeworks/homework1/homework1.py
-          uv run python homeworks/homework2/homework2.py
-          uv run python homeworks/homework3/homework3.py
-          uv run python exercises/ex4/homework4.py
+          uv run python examples/histogram_equalization.py
+          uv run python examples/image_smoothing.py
+          uv run python examples/edge_detection.py
+          uv run python examples/line_detection.py

@@ -1,8 +1,8 @@
 """Shared fixtures.
 
 The images here are generated, not loaded, so the tests do not depend on the
-sample pictures in the assignment folders and a failure points at the algorithm
-rather than at a file.
+sample pictures in `samples/` and a failure points at the algorithm rather
+than at a file.
 """
 
 import numpy as np
@@ -13,7 +13,7 @@ from numpy.typing import NDArray
 @pytest.fixture
 def rng() -> np.random.Generator:
     """A generator with a fixed seed, so a failure can be reproduced."""
-    return np.random.default_rng(20180626)
+    return np.random.default_rng(4711)
 
 
 @pytest.fixture

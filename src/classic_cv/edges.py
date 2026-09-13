@@ -62,8 +62,8 @@ def gradient_magnitude(
         gradient_x: derivative along x.
         gradient_y: derivative along y.
         norm: ``"l2"`` is the true magnitude, ``sqrt(gx**2 + gy**2)``.
-            ``"l1"`` is ``|gx| + |gy|``, the cheap approximation the 2018
-            version used. It overstates diagonal edges by up to 41%.
+            ``"l1"`` is ``|gx| + |gy|``, the cheap approximation. It
+            overstates diagonal edges by up to 41%.
     """
     if norm == "l1":
         return np.abs(gradient_x) + np.abs(gradient_y)

@@ -4,11 +4,14 @@ version = "1.0.0"
 description = "Classic computer vision algorithms implemented from scratch: histogram equalisation, convolution, Sobel edge detection and the Hough transform."
 readme = "README.md"
 requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "Leonard Michalas" }]
 keywords = ["computer-vision", "image-processing", "convolution", "sobel", "hough-transform", "histogram-equalization"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "Intended Audience :: Education",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering :: Image Processing",
@@ -41,7 +44,7 @@ packages = ["src/classic_cv"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-src = ["src", "tests", "assignments"]
+src = ["src", "tests", "examples"]
 
 [tool.ruff.lint]
 select = ["E", "W", "F", "I", "N", "UP", "B", "A", "C4", "SIM", "PTH", "RUF"]

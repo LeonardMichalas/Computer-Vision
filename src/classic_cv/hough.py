@@ -53,9 +53,9 @@ def threshold_mask(image: GrayImage, threshold: int = 0, below: bool = True) -> 
         image: greyscale input.
         threshold: the cut-off.
         below: ``True`` selects pixels at or below the threshold, which is what
-            you want for dark ink on white paper -- the case the 2018 version
-            hardcoded. ``False`` selects pixels at or above it, which is what
-            you want for a white-on-black edge map out of :func:`sobel_edges`.
+            you want for dark ink on white paper. ``False`` selects pixels at
+            or above it, which is what you want for a white-on-black edge map
+            out of :func:`sobel_edges`.
     """
     source = np.asarray(image, dtype=np.int32)
     return source <= threshold if below else source >= threshold

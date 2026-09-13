@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Assignment 2 -- smoothing with a box filter.
+"""Smoothing with a box filter.
 
 Applies a hand-written mean filter to an image and saves the result next to the
 original. Works on colour and greyscale alike, one channel at a time.
 
-    python homework2.py
-    python homework2.py --image kind.png --kernel 9 --padding zero
+    python examples/image_smoothing.py
+    python examples/image_smoothing.py --image samples/kind.png --kernel 9
 """
 
 from __future__ import annotations
@@ -19,8 +19,9 @@ import numpy as np
 
 from classic_cv import box_kernel, correlate, save, to_uint8
 
-HERE = Path(__file__).parent
-DEFAULT_IMAGE = HERE / "ebay.png"
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_IMAGE = ROOT / "samples" / "ebay.png"
+DEFAULT_OUTPUT = ROOT / "output" / "image_smoothing"
 
 
 def main() -> None:
@@ -33,11 +34,11 @@ def main() -> None:
         "--padding",
         choices=["edge", "zero", "reflect"],
         default="edge",
-        help="how to treat pixels outside the border. 'zero' is what the 2018 "
-        "version did, and it leaves a dark rim (default: edge)",
+        help="how to treat pixels outside the border. 'zero' treats everything "
+        "outside as black and leaves a dark rim (default: edge)",
     )
     parser.add_argument(
-        "--output", type=Path, default=HERE / "output", help="where to write results"
+        "--output", type=Path, default=DEFAULT_OUTPUT, help="where to write results"
     )
     parser.add_argument("--show", action="store_true", help="open the result in a window")
     args = parser.parse_args()

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Assignment 4 -- the Hough transform.
+"""Line detection with the Hough transform.
 
 Finds straight lines by voting. Every marked pixel votes for each line that
 could pass through it; the lines that really exist collect the most votes. The
 accumulator is saved as an image too, because the voting pattern is the part
 worth looking at.
 
-    python homework4.py
-    python homework4.py --image img3.pgm --peaks 4 --theta-bins 360
+    python examples/line_detection.py
+    python examples/line_detection.py --image samples/lines_noise_high.pgm --peaks 4
 """
 
 from __future__ import annotations
@@ -20,8 +20,9 @@ import cv2
 from classic_cv import draw_lines, find_peaks, hough_transform, load_grayscale, save, threshold_mask
 from classic_cv.images import normalise
 
-HERE = Path(__file__).parent
-DEFAULT_IMAGE = HERE / "img5.pgm"
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_IMAGE = ROOT / "samples" / "lines_clean.pgm"
+DEFAULT_OUTPUT = ROOT / "output" / "line_detection"
 
 
 def main() -> None:
@@ -41,7 +42,7 @@ def main() -> None:
         "--suppression", type=int, default=10, help="cells cleared around each peak"
     )
     parser.add_argument(
-        "--output", type=Path, default=HERE / "output", help="where to write results"
+        "--output", type=Path, default=DEFAULT_OUTPUT, help="where to write results"
     )
     parser.add_argument("--show", action="store_true", help="open the results in windows")
     args = parser.parse_args()

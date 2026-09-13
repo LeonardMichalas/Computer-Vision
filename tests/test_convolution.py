@@ -67,7 +67,7 @@ def test_even_kernels_are_rejected(size: int) -> None:
 
 
 def test_zero_padding_darkens_the_border(noise: NDArray[np.uint8]) -> None:
-    """The dark rim the 2018 version produced, kept available on purpose."""
+    """Treating the outside as black darkens the border, by construction."""
     zero = correlate(noise, box_kernel(5), padding="zero")
     edge = correlate(noise, box_kernel(5), padding="edge")
     assert zero[0, 0] < edge[0, 0]
