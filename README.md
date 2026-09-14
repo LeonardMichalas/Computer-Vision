@@ -1,5 +1,9 @@
 # Classic Computer Vision
 
+[![CI](https://github.com/LeonardMichalas/Computer-Vision/actions/workflows/ci.yml/badge.svg)](https://github.com/LeonardMichalas/Computer-Vision/actions/workflows/ci.yml)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 **Classic computer vision algorithms, implemented from scratch.** Histogram equalisation, convolution, Sobel edge detection and the Hough transform — written out by hand with NumPy, rather than by calling the one-line OpenCV function that already does it.
 
 That is the point of this repository. OpenCV is here to move images between disk and memory, and in the test suite as an independent second opinion to check the hand-written results against. It never provides the algorithm.
